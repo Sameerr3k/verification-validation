@@ -1,0 +1,51 @@
+[USER, PASSWORD]
+
+AuthSystem
+-----------
+users: ℙ USER
+passwords: USER ↔ PASSWORD
+
+∀ u: USER • (u ∈ users ⇒ ∃ p: PASSWORD • (u, p) ∈ passwords)
+
+
+Signup
+-----------
+ΔAuthSystem
+user?: USER
+pass?: PASSWORD
+
+user? ∉ users
+
+users' = users ∪ {user?}
+passwords' = passwords ∪ {(user?, pass?)}
+
+
+Login
+-----------
+ΞAuthSystem
+user?: USER
+pass?: PASSWORD
+success!: BOOL
+
+(user? ∈ users ∧ (user?, pass?) ∈ passwords)
+⇒ success! = TRUE
+
+¬(user? ∈ users ∧ (user?, pass?) ∉ passwords)
+⇒ success! = FALSE
+
+
+UserAlreadyExists
+-----------
+ΞAuthSystem
+user?: USER
+
+user? ∈ users
+
+
+InvalidLogin
+-----------
+ΞAuthSystem
+user?: USER
+pass?: PASSWORD
+
+(user? ∉ users ∨ (user?, pass?) ∉ passwords)
